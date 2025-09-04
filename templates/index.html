@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ data.personal_info.name }} - Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home">{{ data.personal_info.name }}</a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content" data-aos="fade-up">
+                <div class="hero-image">
+                    <img src="{{ url_for('static', filename='images/aditya_image.png') }}" alt="{{ data.personal_info.name }}" class="profile-img">
+                    <div class="image-overlay"></div>
+                </div>
+                <h1 class="hero-title">{{ data.personal_info.name }}</h1>
+                <h2 class="hero-subtitle">{{ data.personal_info.title }}</h2>
+                <p class="hero-description">{{ data.personal_info.description }}</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    <a href="#" class="btn btn-secondary" id="download-resume">Download Resume</a>
+                </div>
+                <div class="social-links">
+                    <a href="{{ data.personal_info.linkedin }}" target="_blank" class="social-link">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="{{ data.personal_info.github }}" target="_blank" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:{{ data.personal_info.email }}" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">About Me</h2>
+            <div class="about-content">
+                <div class="about-text" data-aos="fade-right">
+                    <p>{{ data.personal_info.description }}</p>
+                    <div class="about-details">
+                        <div class="detail-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>{{ data.personal_info.email }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-phone"></i>
+                            <span>{{ data.personal_info.phone }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{{ data.personal_info.location }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image" data-aos="fade-left">
+                    <div class="image-wrapper">
+                        <img src="{{ url_for('static', filename='images/aditya_image.png') }}" alt="About {{ data.personal_info.name }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Work Experience</h2>
+            <div class="timeline">
+                {% for exp in data.work_experience %}
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>{{ exp.position }}</h3>
+                        <h4>{{ exp.company }}</h4>
+                        <span class="timeline-date">{{ exp.duration }}</span>
+                        <p>{{ exp.description }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <h2 class="section-title" data-aos="fade-up" style="margin-top: 4rem;">Education</h2>
+            <div class="education-grid">
+                {% for edu in data.education %}
+                <div class="education-card" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 100 }}">
+                    <div class="education-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>{{ edu.degree }}</h3>
+                    <h4>{{ edu.institution }}</h4>
+                    <span class="education-date">{{ edu.duration }}</span>
+                    <p class="education-grade">{{ edu.grade }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Projects</h2>
+            <div class="projects-grid">
+                {% for project in data.projects %}
+                <div class="project-card" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 100 }}">
+                    <div class="project-header">
+                        <h3>{{ project.title }}</h3>
+                        <span class="project-date">{{ project.duration }}</span>
+                    </div>
+                    <p class="project-description">{{ project.description }}</p>
+                    <div class="project-role">
+                        <strong>Role:</strong> {{ project.role }}
+                    </div>
+                    <div class="project-tech">
+                        {% for tech in project.technologies %}
+                        <span class="tech-tag">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="project-links">
+                        <a href="{{ project.github }}" class="project-link" target="_blank">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="achievements">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Achievements & Certifications</h2>
+            
+            <div class="achievements-content">
+                <div class="achievements-column" data-aos="fade-right">
+                    <h3>Achievements</h3>
+                    <ul class="achievement-list">
+                        {% for achievement in data.achievements %}
+                        <li>
+                            <i class="fas fa-trophy"></i>
+                            {{ achievement }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="achievements-column" data-aos="fade-left">
+                    <h3>Certifications</h3>
+                    <ul class="certificate-list">
+                        {% for cert in data.certificates %}
+                        <li>
+                            <i class="fas fa-certificate"></i>
+                            {{ cert }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="activities-section">
+                <div class="activity-column" data-aos="fade-up">
+                    <h3>Co-Curricular Activities</h3>
+                    <ul class="activity-list">
+                        {% for activity in data.activities.co_curricular %}
+                        <li>
+                            <i class="fas fa-star"></i>
+                            {{ activity }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="activity-column" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Extra-Curricular Activities</h3>
+                    <ul class="activity-list">
+                        {% for activity in data.activities.extra_curricular %}
+                        <li>
+                            <i class="fas fa-hands-helping"></i>
+                            {{ activity }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right">
+                    <h3>Let's Connect</h3>
+                    <p>I'm always interested in discussing new opportunities, innovative projects, and collaborations in AI/ML.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>{{ data.personal_info.email }}</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>{{ data.personal_info.phone }}</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Location</h4>
+                                <p>{{ data.personal_info.location }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrapper" data-aos="fade-left">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 {{ data.personal_info.name }}. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="{{ data.personal_info.linkedin }}" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="{{ data.personal_info.github }}" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:{{ data.personal_info.email }}"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
