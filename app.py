@@ -44,6 +44,13 @@ portfolio_data = {
             "grade": "Percentage - 94.40%"
         }
     ],
+    "skills": {
+        "Languages": ["Python", "C", "C++"],
+        "Web/Frameworks": ["Flask", "FastAPI"],
+        "Database": ["MySQL", "MongoDB"],
+        "AI/ML": ["TensorFlow", "Keras", "Scikit-learn", "NumPy", "Pandas"],
+        "Tools": ["Conda", "Jupyter Notebook", "VSCode"]
+    },
     "projects": [
         {
             "title": "Grape Disease Detection and Farm Planner",
