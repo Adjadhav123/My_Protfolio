@@ -54,7 +54,7 @@ portfolio_data = {
     "projects": [
         {
             "title": "Grape Disease Detection and Farm Planner",
-            "duration": "2025 – Present",
+            "duration": "2024 – 2025",
             "description": "Web app for grape disease detection and complete farm planning.",
             "role": "AI/ML Developer",
             "technologies": ["Pretrained CNN models", "ResNet50", "InceptionV3", "Langchain", "Groq API"],
@@ -69,11 +69,11 @@ portfolio_data = {
             "github": "RAGBOT"
         },
         {
-            "title": "Training the YOLO model",
-            "duration": "2024-2025",
-            "description": "Training the YOLO object detection models on various mechanical parts and achieve the accuracy above 90%.",
-            "role": "Machine Learning Intern",
-            "technologies": ["YOLOv8", "OpenCV"],
+            "title": "Animal Disease Prediction using Machine Learning",
+            "duration": "2025 - present",
+            "description": "Built an AI-powered veterinary platform with YOLO-based disease detection, chatbot support, and a secure web interface.",
+            "role": "AI/ML Developer",
+            "technologies": ["Python", "Flask", "YOLO", "MongoDB", "Google Generative AI", "HTML/CSS/JavaScript", "Computer Vision", "Machine Learning"],
             "github": "#"
         }
     ],
